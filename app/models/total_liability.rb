@@ -1,0 +1,3 @@
+class TotalLiability < Account
+
+end

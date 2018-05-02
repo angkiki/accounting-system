@@ -1,0 +1,3 @@
+class TotalAsset < Account
+
+end
