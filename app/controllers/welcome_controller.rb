@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  include ApplicationHelper
 
   def home
   end
