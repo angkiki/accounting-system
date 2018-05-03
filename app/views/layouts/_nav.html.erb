@@ -6,9 +6,6 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
         <%= link_to 'Create Account', new_account_path, class: 'nav-link' %>
       </li>
@@ -19,6 +16,10 @@
 
       <li class='nav-item'>
         <%= link_to 'Balance Sheet', balance_sheet_path, class: 'nav-link' %>
+      </li>
+
+      <li class='nav-item'>
+        <%= link_to 'General Ledger', general_ledger_path, class: 'nav-link' %>
       </li>
   </div>
 </nav>

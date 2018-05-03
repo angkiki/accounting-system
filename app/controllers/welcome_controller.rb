@@ -9,4 +9,10 @@ class WelcomeController < ApplicationController
     @equity = TotalEquity.all
   end
 
+  def general_ledger
+    @asset = TotalAsset.all
+    @liability = TotalLiability.all
+    @equity = TotalEquity.all
+  end
+
 end
