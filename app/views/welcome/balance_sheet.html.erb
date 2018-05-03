@@ -1,0 +1,81 @@
+<h3 align='center'>Assets</h3>
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Total</th>
+  </tr>
+
+  <% @asset.each do |asset| %>
+
+    <% total = 0 %>
+
+    <% asset.transactions.each do |t| %>
+
+      <tr>
+        <td><%= t.date %></td>
+        <td><%= t.description %></td>
+        <td><%= t.amount %></td>
+        <td><%= total += t.amount %></td>
+      </tr>
+
+    <% end %>
+  <% end %>
+</table>
+
+<h3 align='center'>Liabilities</h3>
+
+<table class='table'>
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Total</th>
+  </tr>
+
+  <% @liability.each do |liability| %>
+
+    <% total = 0 %>
+
+    <% liability.transactions.each do |t| %>
+
+      <tr>
+        <td><%= t.date %></td>
+        <td><%= t.description %></td>
+        <td><%= t.amount * -1 %></td>
+        <td><%= total += (t.amount * -1) %></td>
+      </tr>
+
+    <% end %>
+  <% end %>
+</table>
+
+
+<h3 align='center'>Equities</h3>
+
+<table class='table'>
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Total</th>
+  </tr>
+
+  <% @equity.each do |equity| %>
+
+    <% total = 0 %>
+
+    <% equity.transactions.each do |t| %>
+
+      <tr>
+        <td><%= t.date %></td>
+        <td><%= t.description %></td>
+        <td><%= t.amount * -1 %></td>
+        <td><%= total += (t.amount * -1) %></td>
+      </tr>
+
+    <% end %>
+  <% end %>
+</table>
