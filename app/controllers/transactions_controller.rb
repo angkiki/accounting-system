@@ -22,6 +22,19 @@ class TransactionsController < ApplicationController
     redirect_to new_transaction_path
   end
 
+  def edit
+    @transaction = Transaction.find(params[:id])
+    session[:old_account_id] = @transaction.account.id
+  end
+
+  def update
+    @transaction = Transaction.find(params[:id])
+    if @transaction.update_attributes(transaction_params)
+      flash[:success] = 'Updated Transaction'
+      redirect_to account_path(session[:old_account_id])
+    end
+  end
+
   private
   def transaction_params
     params.require(:transaction).permit(:date, :account_id, :amount, :description)

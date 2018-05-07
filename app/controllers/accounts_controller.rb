@@ -15,6 +15,11 @@ class AccountsController < ApplicationController
     end
   end
 
+  def show
+    @account = Account.find(params[:id])
+    @transactions = @account.transactions
+  end
+
   private
   def account_params
     params.require(:account).permit(:type, :name)

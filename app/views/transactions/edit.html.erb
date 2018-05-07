@@ -1,0 +1,38 @@
+<h3 align="center">Update Transaction</h3>
+
+<%= form_for @transaction do |f| %>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: 'form-control' %>
+    </div>
+  </div></br>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto">
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+  </div></br>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto">
+      <%= f.label :amount %>
+      <%= f.number_field :amount, value: number_to_currency(f.object.amount.to_f, delimiter: '', unit: ''), step: :any, class: 'form-control' %>
+    </div>
+  </div></br>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto">
+      <%= f.label :account_id, 'Account' %>
+      <%#= f.select :account_id, options_from_collection_for_select(Account.all, 'id', 'name'), {}, { class: 'form-control' } %>
+      <%= f.collection_select :account_id, Account.all, :id, :name, {}, { class: 'form-control' } %>
+    </div>
+  </div></br>
+
+  <div align="center">
+    <%= f.submit 'Update', class: "btn btn-md btn-primary" %>
+  </div>
+
+<% end %>

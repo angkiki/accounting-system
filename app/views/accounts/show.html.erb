@@ -1,0 +1,23 @@
+<h3 align='center'><%= @account.name %></h3>
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Total</th>
+    <th></th>
+  </tr>
+
+  <% @transactions.each do |t| %>
+    <% total = 0 %>
+
+    <tr>
+      <td><%= t.date %></td>
+      <td><%= t.description %></td>
+      <td><%= display_currency(t.amount) %></td>
+      <td><%= display_currency(total += t.amount) %></td>
+      <td><%= link_to 'Edit', edit_transaction_path(t.id), class: 'btn btn-sm btn-primary' %></td>
+    </tr>
+  <% end %>
+</table>

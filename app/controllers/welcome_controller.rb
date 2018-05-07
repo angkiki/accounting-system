@@ -14,6 +14,8 @@ class WelcomeController < ApplicationController
     @asset = TotalAsset.all
     @liability = TotalLiability.all
     @equity = TotalEquity.all
+    @revenue = Revenue.all
+    @expense = Expense.all
   end
 
 end

@@ -1,6 +1,6 @@
 <% @asset.each do |asset| %>
   <% total = 0 %>
-  <h3 align='center'><%= asset.name %></h3>
+  <h3 align='center'><%= link_to asset.name, account_path(asset.id) %></h3>
   <table class="table">
     <tr>
       <th>Date</th>
@@ -22,7 +22,7 @@
 
 <% @liability.each do |liability| %>
   <% total = 0 %>
-  <h3 align='center'><%= liability.name %></h3>
+  <h3 align='center'><%= link_to liability.name, account_path(liability.id) %></h3>
   <table class='table'>
     <tr>
       <th>Date</th>
@@ -35,8 +35,8 @@
       <tr>
         <td><%= t.date %></td>
         <td><%= t.description %></td>
-        <td><%= display_currency(t.amount * -1) %></td>
-        <td><%= display_currency(total += (t.amount * -1)) %></td>
+        <td><%= display_currency(t.amount) %></td>
+        <td><%= display_currency(total += t.amount) %></td>
       </tr>
     <% end %>
   </table>
@@ -45,7 +45,7 @@
 
 <% @equity.each do |equity| %>
   <% total = 0 %>
-  <h3 align='center'><%= equity.name %></h3>
+  <h3 align='center'><%= link_to equity.name, account_path(equity.id) %></h3>
   <table class='table'>
     <tr>
       <th>Date</th>
@@ -58,8 +58,52 @@
       <tr>
         <td><%= t.date %></td>
         <td><%= t.description %></td>
-        <td><%= display_currency(t.amount * -1) %></td>
-        <td><%= display_currency(total += (t.amount * -1)) %></td>
+        <td><%= display_currency(t.amount) %></td>
+        <td><%= display_currency(total += t.amount) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% @revenue.each do |revenue| %>
+  <% total = 0 %>
+  <h3 align='center'><%= link_to revenue.name, account_path(revenue.id) %></h3>
+  <table class='table'>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Total</th>
+    </tr>
+
+    <% revenue.transactions.each do |t| %>
+      <tr>
+        <td><%= t.date %></td>
+        <td><%= t.description %></td>
+        <td><%= display_currency(t.amount) %></td>
+        <td><%= display_currency(total += t.amount) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% @expense.each do |expense| %>
+  <% total = 0 %>
+  <h3 align='center'><%= link_to expense.name, account_path(expense.id) %></h3>
+  <table class='table'>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Total</th>
+    </tr>
+
+    <% expense.transactions.each do |t| %>
+      <tr>
+        <td><%= t.date %></td>
+        <td><%= t.description %></td>
+        <td><%= display_currency(t.amount) %></td>
+        <td><%= display_currency(total += t.amount) %></td>
       </tr>
     <% end %>
   </table>
