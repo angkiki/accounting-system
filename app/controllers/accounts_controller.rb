@@ -17,8 +17,9 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
-    @transactions = @account.transactions
+    @transactions = @account.transactions.sort_by { |t| t.date }
   end
+
 
   private
   def account_params

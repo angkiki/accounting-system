@@ -35,6 +35,13 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    @transaction.destroy
+    flash[:danger] = 'Transaction deleted'
+    redirect_to general_ledger_path
+  end
+
   private
   def transaction_params
     params.require(:transaction).permit(:date, :account_id, :amount, :description)
