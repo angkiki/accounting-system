@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
   end
 
   def general_ledger
-    @account = Account.all.sort { |a| a.name }
+    @account = Account.all.sort_by { |a| a.name }
   end
 
 end

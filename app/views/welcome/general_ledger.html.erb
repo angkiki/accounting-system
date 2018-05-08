@@ -1,6 +1,6 @@
 <% @account.each do |account| %>
   <% total = 0 %>
-  <h3 align='center'><%= link_to asset.name, account_path(asset.id) %></h3>
+  <h3 align='center'><%= link_to account.name, account_path(account.id) %></h3>
   <table class="table">
     <tr>
       <th>Date</th>
@@ -9,7 +9,7 @@
       <th>Total</th>
     </tr>
 
-    <% account.transactions.sort { |t| t.date  }.each do |t| %>
+    <% account.transactions.sort_by { |t| t.date  }.each do |t| %>
       <tr>
         <td><%= t.date %></td>
         <td><%= t.description %></td>
