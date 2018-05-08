@@ -1,4 +1,4 @@
-<% @asset.each do |asset| %>
+<% @account.each do |account| %>
   <% total = 0 %>
   <h3 align='center'><%= link_to asset.name, account_path(asset.id) %></h3>
   <table class="table">
@@ -9,7 +9,7 @@
       <th>Total</th>
     </tr>
 
-    <% asset.transactions.each do |t| %>
+    <% account.transactions.sort { |t| t.date  }.each do |t| %>
       <tr>
         <td><%= t.date %></td>
         <td><%= t.description %></td>
@@ -19,6 +19,8 @@
     <% end %>
   </table>
 <% end %>
+
+<% if false %>
 
 <% @liability.each do |liability| %>
   <% total = 0 %>
@@ -107,4 +109,7 @@
       </tr>
     <% end %>
   </table>
+<% end %>
+
+
 <% end %>

@@ -11,11 +11,7 @@ class WelcomeController < ApplicationController
   end
 
   def general_ledger
-    @asset = TotalAsset.all
-    @liability = TotalLiability.all
-    @equity = TotalEquity.all
-    @revenue = Revenue.all
-    @expense = Expense.all
+    @account = Account.all.sort { |a| a.name }
   end
 
 end
