@@ -10,9 +10,8 @@
     <th></th>
   </tr>
 
-  <% @transactions.each do |t| %>
-    <% total = 0 %>
-
+  <% total = 0 %>
+  <% @transactions.each do |t| %>    
     <tr>
       <td><%= t.date %></td>
       <td><%= t.description %></td>
