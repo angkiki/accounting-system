@@ -1,1 +1,7 @@
-<h1 align='center'>Homepage</h1>
+<h2 align='center'>Select Your Company</h2>
+
+<div align='center'>
+  <% @company.each do |c| %>
+    <%= link_to c.name, selected_company_path(c.id) %>
+  <% end %>
+</div>

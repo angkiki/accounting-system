@@ -24,14 +24,14 @@
   <div class='row'>
     <div class='col-md-6 ml-auto mr-auto'>
       <%= label_tag :debit_account_id, 'Debit Account' %>
-      <%= select_tag :debit_account_id, options_from_collection_for_select(Account.all, 'id', 'name'), { prompt: 'Select Debit Account', class: 'form-control' } %>
+      <%= select_tag :debit_account_id, options_from_collection_for_select(@company.accounts, 'id', 'name'), { prompt: 'Select Debit Account', class: 'form-control' } %>
     </div>
   </div></br>
 
   <div class='row'>
     <div class='col-md-6 ml-auto mr-auto'>
       <%= label_tag :credit_account_id, 'Credit Account' %>
-      <%= select_tag :credit_account_id, options_from_collection_for_select(Account.all, 'id', 'name'), { prompt: 'Select Credit Account', class: 'form-control' } %>
+      <%= select_tag :credit_account_id, options_from_collection_for_select(@company.accounts, 'id', 'name'), { prompt: 'Select Credit Account', class: 'form-control' } %>
     </div>
   </div></br>
 

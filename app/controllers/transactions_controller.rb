@@ -1,7 +1,9 @@
 class TransactionsController < ApplicationController
+  before_action :reject_if_no_company_selected
 
   def new
     @transaction = Transaction.new
+    @company = Company.find(session[:selected_company_id])
   end
 
   def create
@@ -23,6 +25,7 @@ class TransactionsController < ApplicationController
   end
 
   def edit
+    @company = Company.find(session[:selected_company_id])
     @transaction = Transaction.find(params[:id])
     session[:old_account_id] = @transaction.account.id
   end
@@ -47,4 +50,10 @@ class TransactionsController < ApplicationController
     params.require(:transaction).permit(:date, :account_id, :amount, :description)
   end
 
+  def reject_if_no_company_selected
+    unless session[:selected_company_id]
+      flash[:danger] = 'Select A Company First!'
+      redirect_to root_path
+    end
+  end
 end

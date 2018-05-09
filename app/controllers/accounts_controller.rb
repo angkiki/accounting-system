@@ -1,7 +1,9 @@
 class AccountsController < ApplicationController
+  before_action :reject_if_no_company_selected
 
   def new
     @account = Account.new
+    @company = Company.find(session[:selected_company_id])
   end
 
   def create
@@ -23,6 +25,13 @@ class AccountsController < ApplicationController
 
   private
   def account_params
-    params.require(:account).permit(:type, :name)
+    params.require(:account).permit(:type, :name, :company_id)
+  end
+
+  def reject_if_no_company_selected
+    unless session[:selected_company_id]
+      flash[:danger] = 'Select A Company First!'
+      redirect_to root_path
+    end
   end
 end

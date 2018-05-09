@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+  belongs_to :company
   has_many :transactions
 
   # has 5 different types of accounts

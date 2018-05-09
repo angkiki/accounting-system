@@ -1,0 +1,18 @@
+<h2 align='center'>New Company</h2></br>
+
+<%= form_for @company do |f| %>
+
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto">
+      <%= f.label :name, "Name of Company" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Name of Company" %>
+    </div>
+  </div></br>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div align="center">
+    <%= f.submit, class: "btn btn-md btn-primary" %>
+  </div>
+
+<% end %>
