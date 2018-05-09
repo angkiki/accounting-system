@@ -1,31 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <% if session[:selected_company_id] %>
-      <%= Company.find(session[:selected_company_id]).name %>
-    <% else %>
-      No Company
-    <% end %>
-  </a>
+
+  <% if session[:selected_company_id] %>
+    <%= link_to Company.find(session[:selected_company_id]).name, root_path, class: 'navbar-brand' %>
+  <% elsif !current_user %>
+    <h2>Angkiki's Accounting System</h2>
+  <% else %>
+    <%= link_to "No Company", root_path, class: 'navbar-brand' %>
+  <% end %>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to 'Create Account', new_account_path, class: 'nav-link' %>
-      </li>
+  <% if current_user %>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'Create Account', new_account_path, class: 'nav-link' %>
+        </li>
 
-      <li class='nav-item'>
-        <%= link_to 'Create Transaction', new_transaction_path, class: 'nav-link' %>
-      </li>
+        <li class='nav-item'>
+          <%= link_to 'Create Transaction', new_transaction_path, class: 'nav-link' %>
+        </li>
 
-      <li class='nav-item'>
-        <%= link_to 'Create Company', new_company_path, class: 'nav-link' %>
-      </li>
+        <li class='nav-item'>
+          <%= link_to 'Create Company', new_company_path, class: 'nav-link' %>
+        </li>
 
-      <li class='nav-item'>
-        <%= link_to 'General Ledger', general_ledger_path, class: 'nav-link' %>
-      </li>
-  </div>
+        <li class='nav-item'>
+          <%= link_to 'General Ledger', general_ledger_path, class: 'nav-link' %>
+        </li>
+
+        <li class='nav-item'>
+          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+    </div>
+  <% end %>
 </nav>

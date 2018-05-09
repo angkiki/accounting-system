@@ -3,16 +3,16 @@ class WelcomeController < ApplicationController
   before_action :reject_if_no_company_selected, only: [:general_ledger]
 
   def home
-    @company = Company.all
+    @company = current_user.companies
   end
 
-  def balance_sheet
+  # def balance_sheet
     # @company = Company.find(session[:selected_company_id])
     #
     # @asset = @company.total_assets.all
     # @liability = @company.total_liabilities.all
     # @equity = TotalEquity.all
-  end
+  # end
 
   def general_ledger
     @company = Company.find(session[:selected_company_id])

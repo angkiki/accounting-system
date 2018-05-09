@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   root to: redirect('/users/sign_in')
 
-  get "balance-sheet", to: "welcome#balance_sheet"
+  # get "balance-sheet", to: "welcome#balance_sheet"
   get "general-ledger", to: "welcome#general_ledger"
-  get "selected-company/:id", to: "welcome#selected_company"
+  get "selected-company/:id", to: "welcome#selected_company", as: "selected_company"
 end
