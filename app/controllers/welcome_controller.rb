@@ -6,13 +6,21 @@ class WelcomeController < ApplicationController
     @company = current_user.companies
   end
 
-  # def balance_sheet
-    # @company = Company.find(session[:selected_company_id])
-    #
-    # @asset = @company.total_assets.all
-    # @liability = @company.total_liabilities.all
-    # @equity = TotalEquity.all
-  # end
+  def balance_sheet
+    @company = Company.includes(:accounts).find(session[:selected_company_id])
+
+    @pnl = @company.profit_and_loss_figure
+    @asset = @company.total_assets
+    @liability = @company.total_liabilities
+    @equity = @company.total_equities
+  end
+
+  def profit_and_loss
+    @company = Company.find(session[:selected_company_id])
+
+    @revenue = @company.revenues
+    @expense = @company.expenses
+  end
 
   def general_ledger
     @company = Company.find(session[:selected_company_id])

@@ -1,0 +1,76 @@
+<h1 align="center">Profit &amp; Loss</h1>
+
+<div class="table-holder">
+  <table class="table">
+    <% total_revenue = 0 %>
+
+    <tr>
+      <th colspan="2">Revenue</th>
+    </tr>
+
+    <% @revenue.each do |acc| %>
+      <% total_revenue += acc.transactions.sum(:amount) %>
+
+      <tr>
+        <td><%= acc.name %></td>
+        <td><%= display_currency(acc.transactions.sum(:amount) * -1) %></td>
+      </tr>
+
+    <% end %>
+
+    <tr>
+      <td class="total">Total Revenue</td>
+      <td class="total"><%= display_currency(total_revenue * -1) %></td>
+    </tr>
+
+    <tr>
+      <th colspan="2">Expense</th>
+    </tr>
+
+    <% total_expense = 0 %>
+
+    <% @expense.each do |acc| %>
+      <% total_expense += acc.transactions.sum(:amount) %>
+
+      <tr>
+        <td><%= acc.name %></td>
+        <td><%= display_currency(acc.transactions.sum(:amount) * -1) %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td class="total">
+        Total Expense
+      </td>
+      <td class="total"><%= display_currency(total_expense * -1) %></td>
+    </tr>
+
+    <tr>
+      <td class="total">Total Profit/Loss</td>
+      <td class="total"><%= display_currency((total_revenue + total_expense) * -1) %></td>
+    </tr>
+  </table>
+
+</div>
+
+<style media="screen">
+.table-holder {
+  width: 80%;
+  margin: 20px auto;
+}
+
+th {
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+}
+
+td {
+  font-size: 22px;
+}
+
+.total {
+  font-size: 22px;
+  font-weight: bold;
+}
+</style>

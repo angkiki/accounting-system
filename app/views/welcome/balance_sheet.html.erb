@@ -1,81 +1,101 @@
-<h3 align='center'>Assets</h3>
+<h1 align="center">Balance Sheet</h1>
 
-<table class="table">
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Total</th>
-  </tr>
+<div class='table-holder'>
+  <table class="table">
+    <tr>
+      <th colspan="2">Assets</th>
+    </tr>
 
-  <% @asset.each do |asset| %>
+    <% total_asset = 0 %>
 
-    <% total = 0 %>
-
-    <% asset.transactions.each do |t| %>
+    <% @asset.each do |acc| %>
+      <% total_asset += acc.transactions.sum(:amount) %>
 
       <tr>
-        <td><%= t.date %></td>
-        <td><%= t.description %></td>
-        <td><%= t.amount %></td>
-        <td><%= total += t.amount %></td>
+        <td><%= acc.name %></td>
+        <td><%= display_currency(acc.transactions.sum(:amount)) %></td>
       </tr>
-
     <% end %>
-  <% end %>
-</table>
 
-<h3 align='center'>Liabilities</h3>
+    <tr>
+      <td class="total">Total Asset</td>
+      <td class="total"><%= display_currency(total_asset) %></td>
+    </tr>
 
-<table class='table'>
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Total</th>
-  </tr>
+    <tr>
+      <th colspan="2">Liabilities</th>
+    </tr>
 
-  <% @liability.each do |liability| %>
+    <% total_liability = 0 %>
 
-    <% total = 0 %>
-
-    <% liability.transactions.each do |t| %>
+    <% @liability.each do |acc| %>
+      <% total_liability += acc.transactions.sum(:amount) %>
 
       <tr>
-        <td><%= t.date %></td>
-        <td><%= t.description %></td>
-        <td><%= t.amount * -1 %></td>
-        <td><%= total += (t.amount * -1) %></td>
+        <td><%= acc.name %></td>
+        <td><%= display_currency(acc.transactions.sum(:amount)) %></td>
       </tr>
-
     <% end %>
-  <% end %>
-</table>
 
+    <tr>
+      <td class="total">Total Liability</td>
+      <td class="total"><%= display_currency(total_liability) %></td>
+    </tr>
 
-<h3 align='center'>Equities</h3>
+    <tr>
+      <th colspan="2">Total Equities</th>
+    </tr>
 
-<table class='table'>
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Total</th>
-  </tr>
+    <% total_equity = 0 %>
 
-  <% @equity.each do |equity| %>
+    <% @equity.each do |acc| %>
+      <% unless acc.name == "Opening Balance" %>
 
-    <% total = 0 %>
+        <% total_equity += acc.transactions.sum(:amount) %>
 
-    <% equity.transactions.each do |t| %>
+        <tr>
+          <td><%= acc.name %></td>
+          <td><%= display_currency(acc.transactions.sum(:amount)) %></td>
+        </tr>
 
-      <tr>
-        <td><%= t.date %></td>
-        <td><%= t.description %></td>
-        <td><%= t.amount * -1 %></td>
-        <td><%= total += (t.amount * -1) %></td>
-      </tr>
-
+      <% end %>
     <% end %>
-  <% end %>
-</table>
+
+    <tr>
+      <td>Profit/Loss</td>
+      <td><%= display_currency(@pnl) %></td>
+    </tr>
+
+    <tr>
+      <td class="total">Total Equity</td>
+      <td class="total"><%= display_currency(total_equity + @pnl) %></td>
+    </tr>
+
+    <tr>
+      <td class="total">Total Liability + Equity</td>
+      <td class="total"><%= display_currency(total_liability + total_equity + @pnl) %></td>
+    </tr>
+  </table>
+</div>
+
+<style media="screen">
+.table-holder {
+  width: 80%;
+  margin: 20px auto;
+}
+
+th {
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+}
+
+td {
+  font-size: 22px;
+}
+
+.total {
+  font-size: 22px;
+  font-weight: bold;
+}
+</style>

@@ -16,4 +16,6 @@ class Account < ApplicationRecord
     ["Revenue", "Revenue"],
     ["Expense", "Expense"]
   ]
+
+  
 end
