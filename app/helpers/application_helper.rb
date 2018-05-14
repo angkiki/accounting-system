@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def display_currency(value)
-    "%.2f" % value.truncate(2)
+    number_to_currency(value, precision: 2)
   end
-  
+
 end
