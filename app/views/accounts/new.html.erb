@@ -1,21 +1,3 @@
 <%= form_for @account do |f| %>
-
-  <div class='row'>
-    <div class='col-md-6 ml-auto mr-auto'>
-      <%= f.text_field :name, placeholder: 'Enter Account Name', autofocus: true, class: 'form-control' %>
-    </div>
-  </div></br>
-
-  <div class='row'>
-    <div class='col-md-6 ml-auto mr-auto'>
-      <%= f.select :type, options_for_select(Account::AccountTypes), { prompt: 'Select An Account Type' }, class: 'form-control' %>
-    </div>
-  </div></br>
-
-  <%= f.hidden_field :company_id, value: @company.id %>
-
-  <div align='center'>
-    <%= f.submit class: 'btn btn-md btn-primary' %>
-  </div>
-
+  <%= render "form", f: f %>
 <% end %>
