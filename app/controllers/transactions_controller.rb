@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :reject_if_no_company_selected
+  # before_action :reject_if_empty_fields, only: [:create]
 
   def new
     @transaction = Transaction.new
@@ -7,21 +8,28 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @date = transaction_params[:date]
+    if transaction_params[:date] == "" || transaction_params[:amount] == 0 || transaction_params[:description] == "" || params[:debit_account_id] == "" || params[:credit_account_id] == ""
+      flash[:danger] = "One or more fields was empty"
+      @transaction = Transaction.new(transaction_params)
+      @company = Company.find(session[:selected_company_id])
+      render :new
+    else
+      @date = transaction_params[:date]
 
-    @debit_amount = transaction_params[:amount].to_f
-    @credit_amount = transaction_params[:amount].to_f * -1
+      @debit_amount = transaction_params[:amount].to_f
+      @credit_amount = transaction_params[:amount].to_f * -1
 
-    @description = transaction_params[:description]
+      @description = transaction_params[:description]
 
-    @debit_account_id = params[:debit_account_id]
-    @credit_account_id = params[:credit_account_id]
+      @debit_account_id = params[:debit_account_id]
+      @credit_account_id = params[:credit_account_id]
 
-    Transaction.create(date: @date, amount: @debit_amount, description: @description, account_id: @debit_account_id)
-    Transaction.create(date: @date, amount: @credit_amount, description: @description, account_id: @credit_account_id)
+      Transaction.create(date: @date, amount: @debit_amount, description: @description, account_id: @debit_account_id)
+      Transaction.create(date: @date, amount: @credit_amount, description: @description, account_id: @credit_account_id)
 
-    flash[:success] = 'Transactions Saved'
-    redirect_to new_transaction_path
+      flash[:success] = 'Transactions Saved'
+      redirect_to new_transaction_path
+    end
   end
 
   def edit

@@ -28,6 +28,11 @@ class WelcomeController < ApplicationController
     @account = @company.accounts.sort_by { |a| a.name }
   end
 
+  def double_entry_ledger
+    @company = Company.find(session[:selected_company_id])
+    @transactions = @company.transactions
+  end
+
   def selected_company
     session[:selected_company_id] = params[:id]
     redirect_to root_path

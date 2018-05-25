@@ -11,14 +11,14 @@
   </tr>
 
   <% total = 0 %>
-  <% @transactions.each do |t| %>    
+  <% @transactions.each do |t| %>
     <tr>
       <td><%= t.date %></td>
       <td><%= t.description %></td>
       <td><%= display_currency(t.amount) %></td>
       <td><%= display_currency(total += t.amount) %></td>
       <td><%= link_to 'Edit', edit_transaction_path(t.id), class: 'btn btn-sm btn-primary' %></td>
-      <td><%= link_to 'Delete', transaction_path(t.id), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+      <td><%= link_to 'Delete', transaction_path(t.id), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "Confirm Delete This Transaction?" } %></td>
     </tr>
   <% end %>
 </table>

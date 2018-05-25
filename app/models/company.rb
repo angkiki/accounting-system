@@ -7,6 +7,8 @@ class Company < ApplicationRecord
   has_many :revenues
   has_many :expenses
 
+  has_many :transactions, through: :accounts
+
   def profit_and_loss_figure
     total_revenue = 0
     total_expense = 0
